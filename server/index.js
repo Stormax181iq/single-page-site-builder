@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const db = require("./config/db");
 
 const PORT = 5000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get("/", async (req, res) => {
+  const response = await db.query("SELECT * FROM test");
+  res.send(response);
 });
 
 app.listen(PORT, () => {
