@@ -1,0 +1,26 @@
+{
+  "name": "single-page-site-builder",
+  "version": "1.0.0",
+  "description": "Simple app where users can pick a webpage template and certain parts of it. Part of my full stack learning journey",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stormax181iq/single-page-site-builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stormax181iq/single-page-site-builder/issues"
+  },
+  "homepage": "https://github.com/Stormax181iq/single-page-site-builder#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
