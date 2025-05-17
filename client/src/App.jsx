@@ -1,5 +1,14 @@
+import { Routes, Route } from "react-router";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+
 function App() {
-  return <h1 className="text-3xl bg-slate-600 -rotate-10">Hello !</h1>;
+  return (
+    <Routes>
+      <Route index element={<Index />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
 export default App;
