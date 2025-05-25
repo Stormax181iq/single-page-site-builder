@@ -1,1 +1,12 @@
-@import "tailwindcss"
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-main-1: #ffffff;
+  --color-main-2: #082d0f;
+  --color-secondary: #5e5768;
+  --color-accent-1: #ff9770;
+  --color-accent-2: #13c4a3;
+  --font-heading: "Fredericka the Great", "serif";
+  --font-display: "Inter", "sans-serif";
+}
