@@ -18,7 +18,7 @@ export default function Header() {
         {isAuthenticated ? (
           <>
             <HeaderLink to="/my-sites">My sites</HeaderLink>
-            <button className="cursor-pointer p-2 mx-1" onClick={handleLogout}>
+            <button className="font-medium cursor-pointer p-2 mx-1" onClick={handleLogout}>
               Logout
             </button>
           </>
@@ -29,7 +29,7 @@ export default function Header() {
               <ActionButton style={1}>Register</ActionButton>
             </Link>
           </>
-        )}
+        )}  
       </nav>
     </header>
   );
