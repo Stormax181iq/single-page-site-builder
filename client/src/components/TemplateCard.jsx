@@ -2,14 +2,17 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ActionButton from "./ActionButton";
-export default function TemplateCard() {
+export default function TemplateCard({ templateName }) {
   const [selected, setSelected] = useState(false);
   return (
-    <article className="group relative w-64 rounded-xl">
+    <article
+      className="group relative w-64 rounded-xl"
+      aria-label={`${templateName} template`}
+    >
       <img
         className="rounded-xl z-0"
         src="https://picsum.photos/1400/1200"
-        alt="Preview of the template"
+        alt={`Preview of ${templateName} template`}
       />
       <div className="rounded-xl absolute flex justify-center items-center p-1 top-0 z-1 w-full h-full">
         {selected ? (
