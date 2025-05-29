@@ -5,8 +5,7 @@ const db = require("./config/db");
 const PORT = 5000;
 
 app.get("/", async (req, res) => {
-  const response = await db.query("SELECT * FROM test");
-  res.send(response);
+  res.send("hello");
 });
 
 app.listen(PORT, () => {
