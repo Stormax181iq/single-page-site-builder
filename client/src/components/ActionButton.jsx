@@ -7,7 +7,7 @@ export default function ActionButton({
   return (
     <button
       style={{ backgroundColor: `var(--accent-${style})` }}
-      className={`font-medium p-2 rounded-3xl text-black mx-1 cursor-pointer ${className}`}
+      className={`font-medium p-2 shadow-md/50 rounded-3xl text-black mx-1 cursor-pointer ${className}`}
       {...props}
     >
       {children}
