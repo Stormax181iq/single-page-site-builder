@@ -17,7 +17,7 @@ export default function TemplateCard({
         src="https://picsum.photos/1400/1200"
         alt={`Preview of ${templateName} template`}
       />
-      <div className="rounded-xl absolute flex justify-center items-center p-1 top-0 z-1 w-full h-full">
+      <div className="rounded-xl absolute flex shadow-lg/49 justify-center items-center p-1 top-0 z-1 w-full h-full">
         {selected ? (
           <button
             onClick={() => setSelected(null)}
