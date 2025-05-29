@@ -1,12 +1,15 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ActionButton from "./ActionButton";
-export default function TemplateCard({ templateName }) {
-  const [selected, setSelected] = useState(false);
+export default function TemplateCard({
+  selected,
+  setSelected,
+  templateId,
+  templateName,
+}) {
   return (
     <article
-      className="group relative w-64 rounded-xl"
+      className="group relative rounded-xl"
       aria-label={`${templateName} template`}
     >
       <img
@@ -17,18 +20,18 @@ export default function TemplateCard({ templateName }) {
       <div className="rounded-xl absolute flex justify-center items-center p-1 top-0 z-1 w-full h-full">
         {selected ? (
           <button
-            onClick={() => setSelected(!selected)}
+            onClick={() => setSelected(null)}
             title="Unselect"
-            className="absolute flex items-center justify-center cursor-pointer border-2 border-main-2 top-1 left-1 w-6 h-6 rounded-full bg-main-1"
+            className="absolute flex items-center justify-center cursor-pointer border-2 border-main-2 top-1 left-1 h-1/12 aspect-square rounded-full bg-main-1"
           >
-            <FontAwesomeIcon className="text-main-2" icon={faCheck} />
+            <FontAwesomeIcon className="text-main-2 fa-lg" icon={faCheck} />
           </button>
         ) : (
           <>
             <div className="absolute rounded-xl top-0 w-full h-full group-hover:bg-black opacity-25"></div>
             <ActionButton
-              onClick={() => setSelected(!selected)}
-              className="z-2 hidden group-hover:block w-32"
+              onClick={() => setSelected(templateId)}
+              className="z-2 hidden group-hover:block w-5/12 aspect-[4/1] text-lg"
             >
               SELECT
             </ActionButton>
