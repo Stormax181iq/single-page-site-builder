@@ -5,6 +5,7 @@ const db = require("./config/db");
 const PORT = 5000;
 
 const authRoutes = require("./routes/auth.routes");
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   res.send("hello");
