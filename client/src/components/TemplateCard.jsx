@@ -5,8 +5,12 @@ import ActionButton from "./ActionButton";
 export default function TemplateCard() {
   const [selected, setSelected] = useState(false);
   return (
-    <div className="group relative w-64 rounded-xl">
-      <img className="rounded-xl z-0" src="https://picsum.photos/1400/1200" />
+    <article className="group relative w-64 rounded-xl">
+      <img
+        className="rounded-xl z-0"
+        src="https://picsum.photos/1400/1200"
+        alt="Preview of the template"
+      />
       <div className="rounded-xl absolute flex justify-center items-center p-1 top-0 z-1 w-full h-full">
         {selected ? (
           <button
@@ -28,6 +32,6 @@ export default function TemplateCard() {
           </>
         )}
       </div>
-    </div>
+    </article>
   );
 }
