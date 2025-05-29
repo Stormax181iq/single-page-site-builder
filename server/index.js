@@ -4,6 +4,8 @@ const db = require("./config/db");
 
 const PORT = 5000;
 
+const authRoutes = require("./routes/auth.routes");
+
 app.get("/", async (req, res) => {
   res.send("hello");
 });
@@ -11,3 +13,5 @@ app.get("/", async (req, res) => {
 app.listen(PORT, () => {
   console.log("App listening on port ", PORT);
 });
+
+app.use("/api/auth", authRoutes);
