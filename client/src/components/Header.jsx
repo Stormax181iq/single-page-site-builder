@@ -8,7 +8,7 @@ export default function Header() {
     return;
   }
   return (
-    <header className="flex w-full justify-around items-center h-[10vh] bg-main-2 text-main-1">
+    <header className="sticky top-0 z-50 flex w-full justify-around items-center h-[10vh] bg-main-2 text-main-1 shadow-md/25">
       <Link className="p-1" to="/">
         <h1 className="font-heading text-3xl font-bold">
           Single page site builder
@@ -18,7 +18,10 @@ export default function Header() {
         {isAuthenticated ? (
           <>
             <HeaderLink to="/my-sites">My sites</HeaderLink>
-            <button className="font-medium cursor-pointer p-2 mx-1" onClick={handleLogout}>
+            <button
+              className="font-medium cursor-pointer p-2 mx-1"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </>
@@ -29,7 +32,7 @@ export default function Header() {
               <ActionButton style={1}>Register</ActionButton>
             </Link>
           </>
-        )}  
+        )}
       </nav>
     </header>
   );
