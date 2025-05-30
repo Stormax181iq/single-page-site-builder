@@ -70,6 +70,15 @@ class AuthController extends Controller {
     }
   };
 
+  logout = async (req, res) => {
+    try {
+      res.clearCookie("token");
+      return res.status(200).send();
+    } catch (error) {
+      this.handleError(error);
+    }
+  };
+
   validateRegistration(username, password, passwordConfirm) {
     if (!password || !passwordConfirm || !username) {
       return "A field is missing";
