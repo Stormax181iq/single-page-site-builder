@@ -21,6 +21,7 @@ export default function LoginForm() {
   return (
     <div className="mx-[15vh] flex items-center justify-center my-8">
       <form
+        autoFocus
         onSubmit={(e) => {
           handleSubmit(e);
         }}

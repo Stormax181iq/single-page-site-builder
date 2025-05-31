@@ -28,6 +28,7 @@ export default function LoginForm() {
         className="bg-main-1 flex flex-col border border-main-2 p-4 rounded-xl"
       >
         <input
+          autoFocus
           className="rounded-md border border-main-2 focus:outline-none focus:ring-4 focus:ring-secondary p-2 text-lg my-2"
           type="text"
           value={username}
