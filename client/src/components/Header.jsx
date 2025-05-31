@@ -1,12 +1,21 @@
 import HeaderLink from "./HeaderLink";
 import ActionButton from "./ActionButton";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 export default function Header() {
-  const isAuthenticated = false;
-  function handleLogout() {
-    return;
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   }
+
   return (
     <header className="sticky top-0 z-50 flex w-full justify-around items-center h-[10vh] bg-main-2 text-main-1 shadow-md/25">
       <Link className="p-1" to="/">
@@ -28,7 +37,7 @@ export default function Header() {
         ) : (
           <>
             <HeaderLink to="/auth/login">Login</HeaderLink>
-            <Link to="/auth/register">
+            <Link tabIndex={-1} to="/auth/register">
               <ActionButton style={1}>Register</ActionButton>
             </Link>
           </>

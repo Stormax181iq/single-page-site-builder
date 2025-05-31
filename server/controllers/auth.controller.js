@@ -21,7 +21,6 @@ class AuthController extends Controller {
         password = null,
         passwordConfirm = null,
       } = req.body || {};
-
       // Validate input
       const validationError = this.validateRegistration(
         username,
@@ -52,7 +51,11 @@ class AuthController extends Controller {
         return this.handleError({ status: 400, message: validationError }, res);
       }
 
-      const user = await this.getUser(username);
+      const user = await this.getUser(username, { includeHash: true });
+      if (!user) {
+        throw { status: 404, message: "User not found" };
+      }
+
       const match = await bcrypt.compare(password, user.hash);
 
       if (match) {
@@ -74,6 +77,27 @@ class AuthController extends Controller {
     try {
       res.clearCookie("token");
       return res.status(200).send();
+    } catch (error) {
+      this.handleError(error);
+    }
+  };
+
+  checkAuth = async (req, res) => {
+    try {
+      const { token = null } = req.cookies || {};
+
+      if (!token) {
+        return res.status(200).json({ isAuthenticated: false });
+      }
+
+      const decoded = await jwt.verify(token, JWT_SECRET_KEY);
+
+      const user = await this.getUser(decoded.id);
+      if (user) {
+        return res.status(200).json({ isAuthenticated: true, user: user });
+      } else {
+        return res.status(200).json({ isAuthenticated: false });
+      }
     } catch (error) {
       this.handleError(error);
     }
@@ -113,9 +137,14 @@ class AuthController extends Controller {
     }
   }
 
-  async getUser(key) {
+  async getUser(key, options = { includeHash: false }) {
     try {
-      let query = "SELECT id, username, hash FROM users";
+      // Build base query with only necessary fields
+      let query = "SELECT id, username";
+      if (options.includeHash) {
+        query += ", hash";
+      }
+      query += " FROM users";
 
       // Add a different clause based on input
       if (Number.isInteger(Number(key))) {
@@ -125,11 +154,7 @@ class AuthController extends Controller {
       }
 
       const dbResponse = await db.query(query, [key]);
-      if (dbResponse.rowCount > 0) {
-        return dbResponse.rows[0];
-      } else {
-        return this.handleError({ status: 404, message: "User not found" });
-      }
+      return dbResponse.rowCount > 0 ? dbResponse.rows[0] : null;
     } catch (dbError) {
       return this.handleDatabaseError(dbError);
     }
