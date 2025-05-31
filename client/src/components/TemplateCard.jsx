@@ -22,9 +22,9 @@ export default function TemplateCard({
           <button
             onClick={() => setSelected(null)}
             title="Unselect"
-            className="absolute flex items-center justify-center cursor-pointer border-2 border-main-2 top-1 left-1 h-1/12 aspect-square rounded-full bg-main-1"
+            className="absolute flex items-center justify-center cursor-pointer border-2 border-secondary top-1 left-1 h-1/12 aspect-square rounded-full bg-main-1"
           >
-            <FontAwesomeIcon className="text-main-2 fa-2xl" icon={faCheck} />
+            <FontAwesomeIcon className="text-secondary fa-2xl" icon={faCheck} />
           </button>
         ) : (
           <>

@@ -6,7 +6,7 @@ export default function TemplateSelector() {
   const [selected, setSelected] = useState(null);
   return (
     <div className="mx-[15vh] my-4 font-display">
-      <h2 className="font-heading text-4xl font-semibold mb-2">
+      <h2 className="font-heading text-main-2 text-4xl font-semibold mb-2">
         Select a template
       </h2>
       <div className="grid grid-cols-2 gap-6">
