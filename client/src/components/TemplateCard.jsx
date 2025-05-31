@@ -9,7 +9,7 @@ export default function TemplateCard({
 }) {
   return (
     <article
-      className="group relative rounded-xl"
+      className="aspect-[16/9] group relative rounded-xl"
       aria-label={`${templateName} template`}
     >
       <img
@@ -24,14 +24,14 @@ export default function TemplateCard({
             title="Unselect"
             className="absolute flex items-center justify-center cursor-pointer border-2 border-main-2 top-1 left-1 h-1/12 aspect-square rounded-full bg-main-1"
           >
-            <FontAwesomeIcon className="text-main-2 fa-lg" icon={faCheck} />
+            <FontAwesomeIcon className="text-main-2 fa-2xl" icon={faCheck} />
           </button>
         ) : (
           <>
             <div className="absolute rounded-xl top-0 w-full h-full group-hover:bg-black opacity-25"></div>
             <ActionButton
               onClick={() => setSelected(templateId)}
-              className="z-2 hidden group-hover:block w-5/12 aspect-[4/1] text-lg"
+              className="z-2 hidden group-hover:block w-5/12 aspect-[4/1] text-xl"
             >
               SELECT
             </ActionButton>

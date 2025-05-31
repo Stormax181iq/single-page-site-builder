@@ -28,7 +28,7 @@ export default function Header() {
           <>
             <HeaderLink to="/my-sites">My sites</HeaderLink>
             <button
-              className="font-medium cursor-pointer p-2 mx-1"
+              className="font-medium cursor-pointer text-lg p-2 mx-1"
               onClick={handleLogout}
             >
               Logout
@@ -38,7 +38,9 @@ export default function Header() {
           <>
             <HeaderLink to="/auth/login">Login</HeaderLink>
             <Link tabIndex={-1} to="/auth/register">
-              <ActionButton style={1}>Register</ActionButton>
+              <ActionButton className="text-lg" style={1}>
+                Register
+              </ActionButton>
             </Link>
           </>
         )}

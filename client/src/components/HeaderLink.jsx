@@ -4,7 +4,7 @@ export default function HeaderLink({ to, className, children }) {
   return (
     <Link
       to={to}
-      className={"font-medium p-2 mx-1 underline" + " " + className}
+      className={"text-lg font-medium p-2 mx-1 underline" + " " + className}
     >
       {children}
     </Link>
