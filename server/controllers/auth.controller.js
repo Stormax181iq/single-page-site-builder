@@ -124,7 +124,7 @@ class AuthController extends Controller {
         hash,
       ]);
     } catch (dbError) {
-      this.handleDatabaseError(dbError);
+      this.handleDatabaseError(dbError, "Username");
     }
   }
 
@@ -156,22 +156,8 @@ class AuthController extends Controller {
       const dbResponse = await db.query(query, [key]);
       return dbResponse.rowCount > 0 ? dbResponse.rows[0] : null;
     } catch (dbError) {
-      return this.handleDatabaseError(dbError);
+      return this.handleDatabaseError(dbError, "Username");
     }
-  }
-
-  handleDatabaseError(error) {
-    const errorMessages = {
-      23502: "Username cannot be null or empty",
-      23514: "Username doesn't match the requirements",
-      23505: "Username already exists",
-    };
-
-    console.error(error);
-    const message = errorMessages[error.code] || "Internal Server Error";
-    const status = errorMessages[error.code] ? 400 : 500;
-
-    throw { status, message };
   }
 }
 
