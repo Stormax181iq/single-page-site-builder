@@ -10,14 +10,15 @@ export default function TemplateSelector() {
     { name: null, endpoint: null, imgSrc: null },
   ]);
 
+  console.log(templates);
   useEffect(() => {
-    const fetchTemplates = () => {
-      const templateInfos = templateService.getTemplates();
+    const fetchTemplates = async () => {
+      const templateInfos = await templateService.getTemplates();
       setTemplates(templateInfos);
     };
 
     fetchTemplates();
-  });
+  }, []);
   return (
     <div className="mx-[15vh] my-4 font-display">
       <h2 className="font-heading text-main-2 text-4xl font-semibold mb-2">
@@ -26,13 +27,16 @@ export default function TemplateSelector() {
       <div className="grid grid-cols-2 gap-6">
         {templates &&
           templates.map((template, i) => {
-            <TemplateCard
-              selected={selected === 1}
-              templateId={i}
-              templateName={template.name}
-              thumbnailSrc={template.imgSrc}
-              setSelected={setSelected}
-            />;
+            return (
+              <TemplateCard
+                key={template.name}
+                selected={selected === i}
+                templateId={i}
+                templateName={template.name}
+                thumbnailSrc={template.imgSrc}
+                setSelected={setSelected}
+              />
+            );
           })}
       </div>
     </div>
