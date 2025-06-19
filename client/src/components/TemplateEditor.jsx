@@ -12,7 +12,7 @@ export default function TemplateEditor() {
         <div className="w-full h-full col-span-3">
           <iframe
             className="w-full h-full border rounded-lg"
-            src="/api/templates/files/car-rent"
+            src="/api/templates/files/car-rent/index.html"
             frameborder="0"
           ></iframe>
         </div>
