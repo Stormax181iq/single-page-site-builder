@@ -28,7 +28,7 @@ class TemplateController extends Controller {
 
   sendTemplateFile = async (req, res) => {
     try {
-      const { templateId, fileName = "index.html" } = req.params;
+      const { templateId, fileName } = req.params;
 
       await this.checkTemplateId(templateId);
 
@@ -37,7 +37,7 @@ class TemplateController extends Controller {
         "..",
         "templates",
         templateId,
-        fileName
+        ...fileName
       );
 
       try {

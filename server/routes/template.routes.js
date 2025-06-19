@@ -5,7 +5,7 @@ const auth = require("../middlewares/auth");
 router.get("/", templateController.sendTemplatesOverview);
 
 router.get(
-  "/files/:templateId/:fileName",
+  "/files/:templateId{/*fileName}",
   auth,
   templateController.sendTemplateFile
 );
