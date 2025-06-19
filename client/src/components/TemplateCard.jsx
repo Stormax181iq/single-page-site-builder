@@ -6,6 +6,7 @@ export default function TemplateCard({
   setSelected,
   templateId,
   templateName,
+  thumbnailSrc,
 }) {
   return (
     <article
@@ -14,7 +15,7 @@ export default function TemplateCard({
     >
       <img
         className="rounded-xl z-0"
-        src="/api/templates/thumbnails/car-rent"
+        src={thumbnailSrc}
         alt={`Preview of ${templateName} template`}
       />
       <div className="rounded-xl absolute flex shadow-lg/49 justify-center items-center p-1 top-0 z-1 w-full h-full">
