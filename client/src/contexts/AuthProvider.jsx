@@ -71,10 +71,13 @@ export function AuthProvider({ children }) {
   }, []);
 
   const handleError = (error) => {
+    console.error("Authentication error:", error);
     setAuthState((prevState) => ({
       ...prevState,
       error: error.message,
       loading: false,
+      isAuthenticated: false,
+      user: null,
     }));
   };
 

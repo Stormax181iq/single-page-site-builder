@@ -90,7 +90,20 @@ class AuthController extends Controller {
         return res.status(200).json({ isAuthenticated: false });
       }
 
-      const decoded = await jwt.verify(token, JWT_SECRET_KEY);
+      let decoded;
+      try {
+        decoded = await jwt.verify(token, JWT_SECRET_KEY);
+      } catch (error) {
+        if (error.name === "TokenExpiredError") {
+          return res
+            .status(401)
+            .json({ error: "Expired token, please login again" });
+        } else {
+          return res
+            .status(401)
+            .json({ error: "Invalid token, please login again" });
+        }
+      }
 
       const user = await this.getUser(decoded.id);
       if (user) {

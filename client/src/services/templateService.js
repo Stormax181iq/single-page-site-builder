@@ -2,9 +2,8 @@ import axios from "axios";
 
 export async function getTemplates() {
   try {
-    const templateInfos = await axios.get("/api/templates");
-    console.log(templateInfos);
-    return templateInfos;
+    const response = await axios.get("/api/templates");
+    return response.data;
   } catch (error) {
     console.error(error);
   }
