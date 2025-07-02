@@ -25,6 +25,32 @@ class TemplateController extends Controller {
     }
   };
 
+  sendTemplatePlaceholders = async (req, res) => {
+    try {
+      const { templateId } = req.params;
+
+      await this.checkTemplateId(templateId);
+
+      const placeholdersPath = path.join(
+        __dirname,
+        "..",
+        "templates",
+        templateId,
+        "js",
+        "placeholders.json"
+      );
+
+      const rawFile = await fs.readFile(placeholdersPath, {
+        encoding: "utf-8",
+      });
+      const data = await JSON.parse(rawFile);
+
+      res.status(200).json(data);
+    } catch (error) {
+      this.handleError(error);
+    }
+  };
+
   sendTemplateFile = async (req, res) => {
     try {
       const { templateId, fileName } = req.params;

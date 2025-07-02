@@ -21,6 +21,7 @@ export default function Index() {
 
     fetchTemplates();
   }, []);
+
   return (
     <>
       <Header />
@@ -36,6 +37,7 @@ export default function Index() {
           templates &&
           templates.find((template) => template.name === selected)?.endpoint
         }
+        templateId={selected}
       />
     </>
   );

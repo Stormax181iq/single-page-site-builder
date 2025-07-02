@@ -9,4 +9,16 @@ export async function getTemplates() {
   }
 }
 
-export default { getTemplates };
+export async function getPlaceholders(templateId) {
+  try {
+    console.log("trying to get " + templateId);
+    const response = await axios.get(
+      `/api/templates/placeholders/${templateId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export default { getTemplates, getPlaceholders };
