@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import templateService from "../services/templateService";
 import Header from "../components/Header";
@@ -7,6 +7,7 @@ import TemplateEditor from "../components/TemplateEditor";
 
 export default function Index() {
   const [selected, setSelected] = useState(null);
+  const editorRef = useRef(null);
 
   const [templates, setTemplates] = useState([
     { name: null, endpoint: null, imgSrc: null },
@@ -27,8 +28,10 @@ export default function Index() {
         templates={templates}
         selected={selected}
         setSelected={setSelected}
+        editorRef={editorRef}
       />
       <TemplateEditor
+        editorRef={editorRef}
         templateSrc={
           templates &&
           templates.find((template) => template.name === selected)?.endpoint

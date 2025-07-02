@@ -1,6 +1,11 @@
 import TemplateCard from "../components/TemplateCard";
 
-export default function TemplateSelector({ templates, selected, setSelected }) {
+export default function TemplateSelector({
+  templates,
+  selected,
+  setSelected,
+  editorRef,
+}) {
   return (
     <div className="mx-[15vh] my-4 font-display">
       <h2 className="font-heading text-main-2 text-4xl font-semibold mb-2">
@@ -16,6 +21,7 @@ export default function TemplateSelector({ templates, selected, setSelected }) {
                 templateName={template.name}
                 thumbnailSrc={template.imgSrc}
                 setSelected={setSelected}
+                editorRef={editorRef}
               />
             );
           })}

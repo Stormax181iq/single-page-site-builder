@@ -6,6 +6,7 @@ export default function TemplateCard({
   setSelected,
   templateName,
   thumbnailSrc,
+  editorRef,
 }) {
   return (
     <article
@@ -30,7 +31,10 @@ export default function TemplateCard({
           <>
             <div className="absolute rounded-xl top-0 w-full h-full group-hover:bg-black opacity-25"></div>
             <ActionButton
-              onClick={() => setSelected(templateName)}
+              onClick={() => {
+                setSelected(templateName);
+                editorRef?.current?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="z-2 hidden group-hover:block w-5/12 aspect-[4/1] text-xl"
             >
               SELECT
