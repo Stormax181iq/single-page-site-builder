@@ -2,8 +2,9 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router";
 
 import ActionButton from "./ActionButton";
-export default function TemplateEditor() {
+export default function TemplateEditor({ templateSrc = null }) {
   const { isAuthenticated } = useAuth();
+  console.log(templateSrc);
   return (
     <div className="mx-[15vh] mt-8 mb-4">
       <h2 className="font-heading text-4xl font-semibold text-main-2 mb-2">
@@ -15,13 +16,15 @@ export default function TemplateEditor() {
           <p>test 2</p>
         </div>
         <div className="w-full col-span-3 border rounded-lg">
-          {isAuthenticated ? (
-            <iframe
-              className="w-full h-full"
-              src="/api/templates/files/car-rent/index.html"
-              frameborder="0"
-              allowFullScreen
-            ></iframe>
+          {isAuthenticated && templateSrc ? (
+            <>
+              <iframe
+                className="w-full h-full"
+                src={"/api" + templateSrc}
+                frameborder="0"
+                allowFullScreen
+              ></iframe>
+            </>
           ) : (
             <>
               <p className="m-2 text-center">

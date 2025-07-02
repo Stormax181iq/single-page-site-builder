@@ -15,11 +15,10 @@ class TemplateController extends Controller {
       templates.forEach((name, index, arr) => {
         arr[index] = {
           name: name,
-          endpoint: "/templates/" + name,
+          endpoint: "/templates/files/" + name + "/index.html",
           imgSrc: "/templates/thumbnails/" + name,
         };
       });
-
       res.status(200).json(templates);
     } catch (error) {
       return this.handleError(error, res);
@@ -43,6 +42,7 @@ class TemplateController extends Controller {
       try {
         await fs.access(filePath);
       } catch (error) {
+        console.error(error);
         throw { message: "file not found", status: 404 };
       }
 
@@ -65,7 +65,6 @@ class TemplateController extends Controller {
         `${templateId}`,
         `${templateId}.jpg`
       );
-
       try {
         await fs.access(thumbnailPath);
       } catch (error) {

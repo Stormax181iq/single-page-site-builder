@@ -4,7 +4,6 @@ import ActionButton from "./ActionButton";
 export default function TemplateCard({
   selected,
   setSelected,
-  templateId,
   templateName,
   thumbnailSrc,
 }) {
@@ -31,7 +30,7 @@ export default function TemplateCard({
           <>
             <div className="absolute rounded-xl top-0 w-full h-full group-hover:bg-black opacity-25"></div>
             <ActionButton
-              onClick={() => setSelected(templateId)}
+              onClick={() => setSelected(templateName)}
               className="z-2 hidden group-hover:block w-5/12 aspect-[4/1] text-xl"
             >
               SELECT
