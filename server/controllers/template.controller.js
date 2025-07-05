@@ -73,10 +73,17 @@ class TemplateController extends Controller {
       const form = req.body;
 
       await this.checkTemplateId(templateId);
-
-      const preview = await this.generatePreview(templateId, form);
+      console.log("went this far");
 
       // TODO : Save the preview as well
+      try {
+        await db.query(
+          "INSERT INTO user_sites (user_id, template_id, values) VALUES ($1, $2, $3)",
+          [req.user.id, templateId, form]
+        );
+      } catch (error) {
+        this.handleDatabaseError(error);
+      }
     } catch (error) {
       this.handleError(error, res);
     }

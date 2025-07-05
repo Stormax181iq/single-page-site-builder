@@ -1,5 +1,5 @@
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import ActionButton from "./ActionButton";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ export default function TemplateEditor({
   const [previewUrl, setPreviewUrl] = useState(baseUrl + templateSrc);
   const [form, setForm] = useState({});
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
@@ -30,10 +31,18 @@ export default function TemplateEditor({
     url.search = searchParams.toString();
     return url.toString();
   }
+
   async function handlePreview(e) {
     e.preventDefault();
     setPreviewUrl(buildUrl(baseUrl, templateId, form));
   }
+
+  async function handleSave(e) {
+    e.preventDefault();
+    await templateService.saveContentFields(templateId, form);
+    navigate("/my-sites");
+  }
+
   useEffect(() => {
     setPreviewUrl("/api" + templateSrc);
   }, [templateSrc]);
@@ -56,10 +65,7 @@ export default function TemplateEditor({
         Personalise your template
       </h2>
       <div className="grid w-full h-[80vh] grid-cols-4">
-        <form
-          className="flex flex-col col-span-1 justify-between"
-          onSubmit={handlePreview}
-        >
+        <form className="flex flex-col col-span-1 justify-between">
           <div>
             {form &&
               Object.entries(form).map(([key, value]) => {
@@ -86,8 +92,11 @@ export default function TemplateEditor({
               })}
           </div>
           <div className="flex w-full bottom-0 relative">
-            <ActionButton type="submit" className="w-full mx-4">
+            <ActionButton onClick={handlePreview} className="w-1/2 mx-4">
               Preview
+            </ActionButton>
+            <ActionButton onClick={handleSave} className="w-1/2 mx-4">
+              Save to your Sites
             </ActionButton>
           </div>
         </form>

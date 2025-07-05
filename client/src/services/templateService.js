@@ -20,7 +20,7 @@ export async function getPlaceholders(templateId) {
   }
 }
 
-export async function sendContentFields(templateId, form) {
+export async function saveContentFields(templateId, form) {
   try {
     const response = await axios.post(
       `/api/templates/previews/${templateId}`,
@@ -32,4 +32,4 @@ export async function sendContentFields(templateId, form) {
   }
 }
 
-export default { getTemplates, getPlaceholders, sendContentFields };
+export default { getTemplates, getPlaceholders, saveContentFields };
