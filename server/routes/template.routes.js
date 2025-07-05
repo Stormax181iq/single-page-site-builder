@@ -6,6 +6,7 @@ router.get("/", templateController.sendTemplatesOverview);
 
 router.get(
   "/placeholders/:templateId",
+  auth,
   templateController.sendTemplatePlaceholders
 );
 

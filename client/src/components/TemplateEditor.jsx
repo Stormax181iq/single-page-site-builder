@@ -16,7 +16,8 @@ export default function TemplateEditor({
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handlePreview() {
+  async function handlePreview(e) {
+    e.preventDefault();
     await templateService.sendContentFields(templateId, form);
   }
   useEffect(() => {
@@ -41,48 +42,55 @@ export default function TemplateEditor({
         Personalise your template
       </h2>
       <div className="grid w-full h-[80vh] grid-cols-4">
-        <div className="flex flex-col col-span-1 justify-between">
-          <form>
-            {form &&
-              Object.entries(form).map(([key, value]) => {
-                return (
-                  <div className="relative m-4">
-                    <label
-                      className="absolute px-1 -top-2 left-4 bg-main-1 text-sm"
-                      htmlFor={key}
-                    >
-                      {key}
-                    </label>
-                    <input
-                      className="px-2 py-4 rounded-sm border border-main-2 focus:ring-secondary"
-                      type="text"
-                      key={key}
-                      id={key}
-                      name={key}
-                      value={value || ""}
-                      onChange={handleChange}
-                      placeholder={key}
-                    />
-                  </div>
-                );
-              })}
-          </form>
-          <div className="flex w-full">
-            <ActionButton onClick={handlePreview} className="w-full mx-4">
+        <form
+          className="flex flex-col col-span-1 justify-between"
+          onSubmit={handlePreview}
+        >
+          {form &&
+            Object.entries(form).map(([key, value]) => {
+              return (
+                <div className="relative m-4">
+                  <label
+                    className="absolute px-1 -top-2 left-4 bg-main-1 text-sm"
+                    htmlFor={key}
+                  >
+                    {key}
+                  </label>
+                  <input
+                    className="px-2 py-4 rounded-sm border border-main-2 focus:ring-secondary"
+                    type="text"
+                    key={key}
+                    id={key}
+                    name={key}
+                    value={value || ""}
+                    onChange={handleChange}
+                    placeholder={key}
+                  />
+                </div>
+              );
+            })}
+          <div className="flex w-full bottom-0 relative">
+            <ActionButton type="submit" className="w-full mx-4">
               Preview
             </ActionButton>
           </div>
-        </div>
+        </form>
         <div className="w-full col-span-3 border rounded-lg">
-          {isAuthenticated && templateSrc ? (
-            <>
-              <iframe
-                className="w-full h-full"
-                src={previewUrl}
-                frameborder="0"
-                allowFullScreen
-              ></iframe>
-            </>
+          {isAuthenticated ? (
+            templateSrc ? (
+              <>
+                <iframe
+                  className="w-full h-full"
+                  src={previewUrl}
+                  frameborder="0"
+                  allowFullScreen
+                ></iframe>
+              </>
+            ) : (
+              <>
+                <p className="m-2 text-center">Please choose a template</p>
+              </>
+            )
           ) : (
             <>
               <p className="m-2 text-center">
