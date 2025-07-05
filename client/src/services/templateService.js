@@ -11,9 +11,20 @@ export async function getTemplates() {
 
 export async function getPlaceholders(templateId) {
   try {
-    console.log("trying to get " + templateId);
     const response = await axios.get(
       `/api/templates/placeholders/${templateId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function sendContentFields(templateId, form) {
+  try {
+    const response = await axios.post(
+      `/api/templates/previews/${templateId}`,
+      form
     );
     return response.data;
   } catch (error) {
