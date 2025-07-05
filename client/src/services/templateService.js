@@ -32,4 +32,4 @@ export async function sendContentFields(templateId, form) {
   }
 }
 
-export default { getTemplates, getPlaceholders };
+export default { getTemplates, getPlaceholders, sendContentFields };

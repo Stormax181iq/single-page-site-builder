@@ -9,16 +9,30 @@ export default function TemplateEditor({
   editorRef,
   templateId,
 }) {
-  const [previewUrl, setPreviewUrl] = useState("/api" + templateSrc);
+  const baseUrl = "http://localhost:5173/api";
+  const [previewUrl, setPreviewUrl] = useState(baseUrl + templateSrc);
   const [form, setForm] = useState({});
   const { isAuthenticated } = useAuth();
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function buildUrl(baseUrl, templateName, params) {
+    const url = new URL(
+      baseUrl + "/templates/previews/" + templateName + "/index.html"
+    );
+    const searchParams = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(params)) {
+      searchParams.append(key, value);
+    }
+
+    url.search = searchParams.toString();
+    return url.toString();
+  }
   async function handlePreview(e) {
     e.preventDefault();
-    await templateService.sendContentFields(templateId, form);
+    setPreviewUrl(buildUrl(baseUrl, templateId, form));
   }
   useEffect(() => {
     setPreviewUrl("/api" + templateSrc);
@@ -46,29 +60,31 @@ export default function TemplateEditor({
           className="flex flex-col col-span-1 justify-between"
           onSubmit={handlePreview}
         >
-          {form &&
-            Object.entries(form).map(([key, value]) => {
-              return (
-                <div className="relative m-4">
-                  <label
-                    className="absolute px-1 -top-2 left-4 bg-main-1 text-sm"
-                    htmlFor={key}
-                  >
-                    {key}
-                  </label>
-                  <input
-                    className="px-2 py-4 rounded-sm border border-main-2 focus:ring-secondary"
-                    type="text"
-                    key={key}
-                    id={key}
-                    name={key}
-                    value={value || ""}
-                    onChange={handleChange}
-                    placeholder={key}
-                  />
-                </div>
-              );
-            })}
+          <div>
+            {form &&
+              Object.entries(form).map(([key, value]) => {
+                return (
+                  <div className="relative m-4">
+                    <label
+                      className="absolute px-1 -top-2 left-4 bg-main-1 text-sm"
+                      htmlFor={key}
+                    >
+                      {key}
+                    </label>
+                    <input
+                      className="px-2 py-4 rounded-sm border border-main-2 focus:ring-secondary"
+                      type="text"
+                      key={key}
+                      id={key}
+                      name={key}
+                      value={value || ""}
+                      onChange={handleChange}
+                      placeholder={key}
+                    />
+                  </div>
+                );
+              })}
+          </div>
           <div className="flex w-full bottom-0 relative">
             <ActionButton type="submit" className="w-full mx-4">
               Preview

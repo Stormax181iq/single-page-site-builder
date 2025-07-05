@@ -17,4 +17,16 @@ router.get(
 );
 router.get("/thumbnails/:templateId", templateController.sendTemplateThumbnail);
 
+router.post("/previews/:templateId", auth, templateController.savePreview);
+router.get(
+  "/previews/:templateId/index.html",
+  auth,
+  templateController.sendTemporaryPreview
+);
+router.get(
+  "/previews/:templateId{/*fileName}",
+  auth,
+  templateController.sendTemplateFile
+);
+
 module.exports = router;

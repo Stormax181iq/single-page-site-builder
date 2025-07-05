@@ -51,6 +51,58 @@ class TemplateController extends Controller {
     }
   };
 
+  sendTemporaryPreview = async (req, res) => {
+    try {
+      const { templateId } = req.params;
+      const form = req.query;
+
+      await this.checkTemplateId(templateId);
+
+      const preview = await this.generatePreview(templateId, form);
+
+      // Send the preview
+      res.status(200).send(preview);
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  savePreview = async (req, res) => {
+    try {
+      const { templateId } = req.params;
+      const form = req.body;
+
+      await this.checkTemplateId(templateId);
+
+      const preview = await this.generatePreview(templateId, form);
+
+      // TODO : Save the preview as well
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  generatePreview = async (templateId, form) => {
+    try {
+      const indexPath = path.join(
+        __dirname,
+        "..",
+        "templates",
+        templateId,
+        "index.html"
+      );
+
+      let html = await fs.readFile(indexPath, { encoding: "utf-8" });
+      Object.entries(form).forEach(([key, value]) => {
+        html = html.replaceAll(`{{${key}}}`, value);
+      });
+
+      return html;
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
   sendTemplateFile = async (req, res) => {
     try {
       const { templateId, fileName } = req.params;
