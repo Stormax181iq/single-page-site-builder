@@ -27,7 +27,7 @@ async function auth(req, res, next) {
           .json({ error: "Invalid token, please login again" });
       }
     }
-    const user = authController.getUser(decoded.id);
+    const user = await authController.getUser(decoded.id);
 
     req.user = user;
     next();

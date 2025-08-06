@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router";
 import ActionButton from "./ActionButton";
 import { useEffect, useState } from "react";
 import templateService from "../services/templateService";
+import sitesService from "../services/sitesService";
+
 export default function TemplateEditor({
   templateSrc = null,
   editorRef,
@@ -39,7 +41,7 @@ export default function TemplateEditor({
 
   async function handleSave(e) {
     e.preventDefault();
-    await templateService.saveContentFields(templateId, form);
+    await sitesService.saveUserSite(templateId, form);
     navigate("/my-sites");
   }
 

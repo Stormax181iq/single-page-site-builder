@@ -67,28 +67,6 @@ class TemplateController extends Controller {
     }
   };
 
-  savePreview = async (req, res) => {
-    try {
-      const { templateId } = req.params;
-      const form = req.body;
-
-      await this.checkTemplateId(templateId);
-      console.log("went this far");
-
-      // TODO : Save the preview as well
-      try {
-        await db.query(
-          "INSERT INTO user_sites (user_id, template_id, values) VALUES ($1, $2, $3)",
-          [req.user.id, templateId, form]
-        );
-      } catch (error) {
-        this.handleDatabaseError(error);
-      }
-    } catch (error) {
-      this.handleError(error, res);
-    }
-  };
-
   generatePreview = async (templateId, form) => {
     try {
       const indexPath = path.join(
@@ -158,30 +136,6 @@ class TemplateController extends Controller {
       res.status(200).sendFile(thumbnailPath);
     } catch (error) {
       this.handleError(error, res);
-    }
-  };
-
-  async checkTemplateId(templateId) {
-    if (!templateId) {
-      throw { message: "templateId field cannot be empty", status: 400 };
-    }
-    const availableNames = await this.getTemplates();
-
-    if (!availableNames.includes(templateId)) {
-      throw { message: "Template Id does not exist", status: 404 };
-    }
-  }
-
-  getTemplates = async () => {
-    try {
-      const response = await db.query("SELECT name FROM templates");
-      const templateNames = [];
-      response.rows.forEach((row) => {
-        templateNames.push(row.name);
-      });
-      return templateNames;
-    } catch (error) {
-      this.handleDatabaseError(error, "Template");
     }
   };
 }

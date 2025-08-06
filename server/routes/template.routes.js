@@ -17,7 +17,6 @@ router.get(
 );
 router.get("/thumbnails/:templateId", templateController.sendTemplateThumbnail);
 
-router.post("/previews/:templateId", auth, templateController.savePreview);
 router.get(
   "/previews/:templateId/index.html",
   auth,

@@ -20,16 +20,4 @@ export async function getPlaceholders(templateId) {
   }
 }
 
-export async function saveContentFields(templateId, form) {
-  try {
-    const response = await axios.post(
-      `/api/templates/previews/${templateId}`,
-      form
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export default { getTemplates, getPlaceholders, saveContentFields };
+export default { getTemplates, getPlaceholders };

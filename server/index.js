@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth.routes");
 const templateRoutes = require("./routes/template.routes");
+const siteRoutes = require("./routes/sites.routes");
 const auth = require("./middlewares/auth");
 
 const PORT = 5000;
@@ -22,3 +23,5 @@ app.get("/", auth, (req, res) => {
 app.use("/api/auth", authRoutes);
 
 app.use("/api/templates", templateRoutes);
+
+app.use("/api/sites", siteRoutes);
