@@ -8,7 +8,7 @@ export default function UserSiteCard({ templateId, createdAt, values }) {
   const date = new Date(createdAt);
 
   return (
-    <div className="border m-4 rounded-xl p-2 bg-main-1 text-main-2">
+    <div className="w-2/3 mx-auto border m-4 rounded-xl p-2 bg-main-1 text-main-2">
       <h2 className="text-xl font-bold">{templateId}</h2>
       <p>
         {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}{" "}
