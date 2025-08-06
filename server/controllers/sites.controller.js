@@ -10,8 +10,6 @@ class SitesController extends Controller {
     try {
       const { templateId, form } = req.body;
 
-      console.log(req.body);
-
       await this.checkTemplateId(templateId);
 
       try {

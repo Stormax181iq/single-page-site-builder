@@ -12,4 +12,14 @@ export async function saveUserSite(templateId, form) {
   }
 }
 
-export default { saveUserSite };
+export async function getUserSites() {
+  try {
+    const response = await axios.get(`/api/sites`);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export default { saveUserSite, getUserSites };
