@@ -1,7 +1,7 @@
-import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router";
 
 import ActionButton from "./ActionButton";
+import SiteViewer from "./SiteViewer";
 import { useEffect, useState } from "react";
 import templateService from "../services/templateService";
 import sitesService from "../services/sitesService";
@@ -14,7 +14,6 @@ export default function TemplateEditor({
   const baseUrl = "http://localhost:5173/api";
   const [previewUrl, setPreviewUrl] = useState(baseUrl + templateSrc);
   const [form, setForm] = useState({});
-  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -103,33 +102,10 @@ export default function TemplateEditor({
           </div>
         </form>
         <div className="w-full col-span-3 border rounded-lg">
-          {isAuthenticated ? (
-            templateSrc ? (
-              <>
-                <iframe
-                  className="w-full h-full"
-                  src={previewUrl}
-                  frameborder="0"
-                  allowFullScreen
-                ></iframe>
-              </>
-            ) : (
-              <>
-                <p className="m-2 text-center">Please choose a template</p>
-              </>
-            )
+          {templateSrc ? (
+            <SiteViewer previewUrl={previewUrl} />
           ) : (
-            <>
-              <p className="m-2 text-center">
-                Not authenticated. Your session may have expired. Please login
-                again :
-              </p>
-              <div className="w-full flex justify-center">
-                <ActionButton className="px-4">
-                  <Link to="/auth/login">Login</Link>
-                </ActionButton>
-              </div>
-            </>
+            <p>Please choose a template</p>
           )}
         </div>
       </div>

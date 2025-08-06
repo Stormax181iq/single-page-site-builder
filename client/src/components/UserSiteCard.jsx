@@ -22,6 +22,8 @@ export default function UserSiteCard({ templateId, createdAt, values }) {
         {isValuesShown ? "Hide custom content" : "Show custom content"}
       </ActionButton>
 
+      <ActionButton style={2}>Preview this site</ActionButton>
+
       {isValuesShown &&
         Object.entries(values).map(([key, value]) => (
           <div className="my-2" key={key}>

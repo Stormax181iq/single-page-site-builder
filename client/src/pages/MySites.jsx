@@ -33,7 +33,7 @@ export default function MySites() {
           );
         })
       ) : (
-        <p>User sites not fetched yet</p>
+        <p>You don’t have any website yet !</p>
       )}
     </>
   );
