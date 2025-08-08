@@ -26,6 +26,7 @@ export default function MySites() {
           return (
             <UserSiteCard
               key={i}
+              id={userSite.id}
               templateId={userSite.template_id}
               createdAt={userSite.created_at}
               values={userSite.values}

@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MySites from "./pages/MySites";
+import Preview from "./pages/Preview";
 import { AuthProvider } from "./contexts/AuthProvider";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+        <Route path="sites/:id" element={<Preview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>

@@ -1,4 +1,8 @@
 import useAuth from "../hooks/useAuth";
+
+import { Link } from "react-router";
+import ActionButton from "./ActionButton";
+
 export default function SiteViewer({ previewUrl }) {
   const { isAuthenticated } = useAuth();
 

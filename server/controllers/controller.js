@@ -1,4 +1,6 @@
 const db = require("../config/db");
+const path = require("path");
+const fs = require("fs/promises");
 
 class Controller {
   constructor() {}
@@ -49,6 +51,56 @@ class Controller {
       return templateNames;
     } catch (error) {
       this.handleDatabaseError(error, "Template");
+    }
+  };
+
+  generatePreview = async (templateId, form) => {
+    const indexPath = path.join(
+      __dirname,
+      "..",
+      "templates",
+      templateId,
+      "index.html"
+    );
+
+    let html = await fs.readFile(indexPath, { encoding: "utf-8" });
+    Object.entries(form).forEach(([key, value]) => {
+      html = html.replaceAll(`{{${key}}}`, value);
+    });
+
+    return html;
+  };
+
+  sendTemplateFile = async (req, res) => {
+    try {
+      const { templateId, fileName } = req.params;
+
+      await this.checkTemplateId(templateId);
+
+      const filePath = path.join(
+        __dirname,
+        "..",
+        "templates",
+        templateId,
+        ...fileName
+      );
+
+      try {
+        await fs.access(filePath);
+      } catch (error) {
+        console.error(error);
+        throw { message: "file not found", status: 404 };
+      }
+
+      res.status(200).sendFile(filePath);
+    } catch (error) {
+      this.handleError(error, res);
+    }
+  };
+
+  checkIdNumeric = (id) => {
+    if (!Number.isInteger(Number(id))) {
+      throw { message: "Id must be a number", status: 400 };
     }
   };
 }
