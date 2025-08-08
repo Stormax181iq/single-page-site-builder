@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ActionButton from "./ActionButton";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function LoginForm() {
   const { register } = useAuth();
@@ -20,7 +20,7 @@ export default function LoginForm() {
     }
   }
   return (
-    <div className="mx-[15vh] flex items-center  justify-center my-8">
+    <div className="mx-[15vh] flex items-center justify-center my-8 flex-col">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -53,6 +53,13 @@ export default function LoginForm() {
           Register
         </ActionButton>
       </form>
+      <p className="mt-2">
+        Already have an account ?{" "}
+        <Link className="underline hover:text-secondary" to="/auth/login">
+          Login
+        </Link>{" "}
+        instead !
+      </p>
     </div>
   );
 }

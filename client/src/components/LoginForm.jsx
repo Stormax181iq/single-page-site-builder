@@ -3,6 +3,8 @@ import ActionButton from "./ActionButton";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 
+import { Link } from "react-router";
+
 export default function LoginForm() {
   const { login } = useAuth();
   const [username, setUsername] = useState("");
@@ -19,7 +21,7 @@ export default function LoginForm() {
     }
   }
   return (
-    <div className="mx-[15vh] flex items-center justify-center my-8">
+    <div className="mx-[15vh] flex items-center justify-center my-8 flex-col">
       <form
         autoFocus
         onSubmit={(e) => {
@@ -45,6 +47,13 @@ export default function LoginForm() {
           Login
         </ActionButton>
       </form>
+      <p className="mt-2">
+        No account ?{" "}
+        <Link className="underline hover:text-secondary" to="/auth/register">
+          Register
+        </Link>{" "}
+        instead !
+      </p>
     </div>
   );
 }
