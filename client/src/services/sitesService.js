@@ -22,4 +22,12 @@ export async function getUserSites() {
   }
 }
 
-export default { saveUserSite, getUserSites };
+export async function deleteSite(id) {
+  try {
+    await axios.delete(`/api/sites/${id}`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export default { saveUserSite, getUserSites, deleteSite };

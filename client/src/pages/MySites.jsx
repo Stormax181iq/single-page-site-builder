@@ -9,12 +9,12 @@ import UserSiteCard from "../components/UserSiteCard";
 export default function MySites() {
   const [userSites, setUserSites] = useState([]);
 
-  useEffect(() => {
-    async function fetchUserSites() {
-      const sites = await sitesService.getUserSites();
-      setUserSites(sites);
-    }
+  const fetchUserSites = async () => {
+    const sites = await sitesService.getUserSites();
+    setUserSites(sites);
+  };
 
+  useEffect(() => {
     fetchUserSites();
   }, []);
 
@@ -30,6 +30,7 @@ export default function MySites() {
               templateId={userSite.template_id}
               createdAt={userSite.created_at}
               values={userSite.values}
+              refreshSites={fetchUserSites}
             />
           );
         })

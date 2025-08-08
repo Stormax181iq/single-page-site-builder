@@ -110,9 +110,48 @@ class SitesController extends Controller {
 
       req.params.templateId = templateId;
 
-      console.log("params: ", req.params);
-
       return await this.sendTemplateFile(req, res);
+    } catch (error) {
+      return this.handleError(error, res);
+    }
+  };
+
+  deleteSite = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      this.checkIdNumeric(id);
+
+      let dbResponse;
+
+      try {
+        dbResponse = await db.query(
+          "SELECT user_id FROM user_sites WHERE id = $1",
+          [id]
+        );
+      } catch (error) {
+        this.handleDatabaseError(error);
+      }
+
+      if (dbResponse.rowCount < 1) {
+        return res.status(404).json({ error: "Cannot find this site’s id" });
+      }
+
+      const userId = dbResponse.rows[0].user_id;
+
+      if (userId != req.user.id) {
+        return res
+          .status(403)
+          .json({ error: "You can’t delete a site that you don’t own" });
+      }
+
+      try {
+        await db.query("DELETE FROM user_sites WHERE id = $1", [id]);
+      } catch (error) {
+        this.handleDatabaseError(error);
+      }
+
+      return res.status(200).send();
     } catch (error) {
       return this.handleError(error, res);
     }
