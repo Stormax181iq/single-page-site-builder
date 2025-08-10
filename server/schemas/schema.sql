@@ -181,7 +181,7 @@ ALTER TABLE ONLY public.user_sites
 
 -- Added manually
 
-INSERT INTO templates (name)
+INSERT INTO public.templates (name)
 VALUES
 ('car-rent'),
 ('wedding-bootstrap-template'),
