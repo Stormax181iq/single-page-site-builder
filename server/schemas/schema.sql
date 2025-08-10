@@ -67,7 +67,6 @@ ALTER SEQUENCE public.user_sites_id_seq OWNER TO "ec2-user";
 
 ALTER SEQUENCE public.user_sites_id_seq OWNED BY public.user_sites.id;
 
-How do I dump the database schemas from psql ? I want to create a database that is functional yet with empty tables, except for one table that I need to be filled with three values
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: "ec2-user"
 --
