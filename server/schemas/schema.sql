@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: templates; Type: TABLE; Schema: public; Owner: ec2-user
+-- Name: templates; Type: TABLE; Schema: public; Owner: "ec2-user"
 --
 
 CREATE TABLE public.templates (
@@ -29,10 +29,10 @@ CREATE TABLE public.templates (
 );
 
 
-ALTER TABLE public.templates OWNER TO ec2-user;
+ALTER TABLE public.templates OWNER TO "ec2-user";
 
 --
--- Name: user_sites; Type: TABLE; Schema: public; Owner: ec2-user
+-- Name: user_sites; Type: TABLE; Schema: public; Owner: "ec2-user"
 --
 
 CREATE TABLE public.user_sites (
@@ -44,10 +44,10 @@ CREATE TABLE public.user_sites (
 );
 
 
-ALTER TABLE public.user_sites OWNER TO ec2-user;
+ALTER TABLE public.user_sites OWNER TO "ec2-user";
 
 --
--- Name: user_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: ec2-user
+-- Name: user_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: "ec2-user"
 --
 
 CREATE SEQUENCE public.user_sites_id_seq
@@ -59,17 +59,17 @@ CREATE SEQUENCE public.user_sites_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.user_sites_id_seq OWNER TO ec2-user;
+ALTER SEQUENCE public.user_sites_id_seq OWNER TO "ec2-user";
 
 --
--- Name: user_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ec2-user
+-- Name: user_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: "ec2-user"
 --
 
 ALTER SEQUENCE public.user_sites_id_seq OWNED BY public.user_sites.id;
 
 How do I dump the database schemas from psql ? I want to create a database that is functional yet with empty tables, except for one table that I need to be filled with three values
 --
--- Name: users; Type: TABLE; Schema: public; Owner: ec2-user
+-- Name: users; Type: TABLE; Schema: public; Owner: "ec2-user"
 --
 
 CREATE TABLE public.users (
@@ -80,10 +80,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO ec2-user;
+ALTER TABLE public.users OWNER TO "ec2-user";
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ec2-user
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: "ec2-user"
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -95,31 +95,31 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNER TO ec2-user;
+ALTER SEQUENCE public.users_id_seq OWNER TO "ec2-user";
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ec2-user
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: "ec2-user"
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: user_sites id; Type: DEFAULT; Schema: public; Owner: ec2-user
+-- Name: user_sites id; Type: DEFAULT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.user_sites ALTER COLUMN id SET DEFAULT nextval('public.user_sites_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: ec2-user
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Name: templates templates_pkey; Type: CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: templates templates_pkey; Type: CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.templates
@@ -127,7 +127,7 @@ ALTER TABLE ONLY public.templates
 
 
 --
--- Name: user_sites user_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: user_sites user_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.user_sites
@@ -135,7 +135,7 @@ ALTER TABLE ONLY public.user_sites
 
 
 --
--- Name: users users_primary_key; Type: CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: users users_primary_key; Type: CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.users
@@ -143,7 +143,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.users
@@ -151,21 +151,21 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users_id_idx; Type: INDEX; Schema: public; Owner: ec2-user
+-- Name: users_id_idx; Type: INDEX; Schema: public; Owner: "ec2-user"
 --
 
 CREATE INDEX users_id_idx ON public.users USING btree (id);
 
 
 --
--- Name: users_username_idx; Type: INDEX; Schema: public; Owner: ec2-user
+-- Name: users_username_idx; Type: INDEX; Schema: public; Owner: "ec2-user"
 --
 
 CREATE INDEX users_username_idx ON public.users USING btree (username);
 
 
 --
--- Name: user_sites user_sites_template_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: user_sites user_sites_template_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.user_sites
@@ -173,7 +173,7 @@ ALTER TABLE ONLY public.user_sites
 
 
 --
--- Name: user_sites user_sites_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ec2-user
+-- Name: user_sites user_sites_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: "ec2-user"
 --
 
 ALTER TABLE ONLY public.user_sites
