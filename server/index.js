@@ -20,6 +20,10 @@ app.get("/", auth, (req, res) => {
   res.send("hello");
 });
 
+app.get("/test", (req, res) => {
+	res.send("test succeeded");
+});
+
 app.use("/api/auth", authRoutes);
 
 app.use("/api/templates", templateRoutes);
